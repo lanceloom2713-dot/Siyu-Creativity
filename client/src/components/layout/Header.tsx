@@ -5,7 +5,6 @@ import logo from "../../assets/siyu-logo.png";
 const links = [
   ["Home", "/"],
   ["Categories", "/categories"],
-  ["Gallery", "/gallery"],
   ["Blogs", "/blogs"],
   ["About", "/about"],
   ["Contact", "/contact"]

@@ -1,9 +1,10 @@
 import { FormEvent, useState } from "react";
 import { MessageCircle, Phone, Mail, MapPin } from "lucide-react";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { publicCatalogueApi } from "../services/publicCatalogueApi";
 
 export function ContactPage() {
+  const { data: settings } = useQuery({ queryKey: ["public-settings"], queryFn: publicCatalogueApi.getSettings });
   const [form, setForm] = useState({ name: "", phone: "", email: "", message: "" });
   const [sent, setSent] = useState(false);
   const mutation = useMutation({
@@ -17,7 +18,7 @@ export function ContactPage() {
   const submit = (event: FormEvent) => {
     event.preventDefault();
     if (!form.name.trim() || !form.phone.trim() || !form.message.trim()) return;
-    mutation.mutate(form);
+    mutation.mutate({ ...form, recipientEmail: settings?.enquiryEmail ?? settings?.email });
   };
 
   return (
@@ -25,10 +26,11 @@ export function ContactPage() {
       <div>
         <h1 className="font-display text-5xl font-semibold">Contact Siyu Creativity</h1>
         <div className="mt-8 grid gap-4 text-sm text-ink/70">
-          <p className="flex items-center gap-3"><MessageCircle size={18} /> WhatsApp: +91 99999 99999</p>
-          <p className="flex items-center gap-3"><Phone size={18} /> Phone: +91 99999 99999</p>
-          <p className="flex items-center gap-3"><Mail size={18} /> hello@siyucreativity.com</p>
-          <p className="flex items-center gap-3"><MapPin size={18} /> India</p>
+          <p className="flex items-center gap-3"><MessageCircle size={18} /> WhatsApp: {settings?.whatsapp ?? "+91 99999 99999"}</p>
+          <p className="flex items-center gap-3"><Phone size={18} /> Phone: {settings?.phone ?? "+91 99999 99999"}</p>
+          <p className="flex items-center gap-3"><Mail size={18} /> {settings?.email ?? "hello@siyucreativity.com"}</p>
+          <p className="flex items-center gap-3"><MapPin size={18} /> {settings?.address ?? "India"}</p>
+          <p className="flex items-center gap-3"><Mail size={18} /> Enquiries: {settings?.enquiryEmail ?? settings?.email ?? "hello@siyucreativity.com"}</p>
         </div>
       </div>
       <form className="rounded-[2rem] bg-white p-6 shadow-soft" onSubmit={submit}>

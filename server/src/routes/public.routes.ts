@@ -5,6 +5,7 @@ import {
   getCategory,
   getHome,
   getProduct,
+  getWebsiteSettings,
   listBlogs,
   listCategories,
   listFaqs,
@@ -23,4 +24,5 @@ publicRoutes.get("/blogs", listBlogs);
 publicRoutes.get("/blogs/:slug", getBlog);
 publicRoutes.get("/faqs", listFaqs);
 publicRoutes.get("/seo", listSeoPages);
+publicRoutes.get("/settings", getWebsiteSettings);
 publicRoutes.post("/contact", createContactEnquiry);

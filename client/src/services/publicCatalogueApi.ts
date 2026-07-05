@@ -56,6 +56,17 @@ type ApiFaq = {
   answer: string;
 };
 
+export type WebsiteSettings = {
+  whatsapp?: string;
+  phone?: string;
+  email?: string;
+  enquiryEmail?: string;
+  address?: string;
+  businessHours?: string;
+  aboutTitle?: string;
+  aboutText?: string;
+};
+
 type ApiHomepageSection = {
   key: string;
   content?: Partial<{
@@ -231,7 +242,24 @@ export const publicCatalogueApi = {
       return [] as ApiSeoPage[];
     }
   },
-  async createContact(payload: { name: string; phone: string; email?: string; message: string }) {
+  async getSettings() {
+    try {
+      const response = await http.get("/public/settings");
+      return response.data.settings as WebsiteSettings;
+    } catch {
+      return {
+        whatsapp: "+91 99999 99999",
+        phone: "+91 99999 99999",
+        email: "hello@siyucreativity.com",
+        enquiryEmail: "hello@siyucreativity.com",
+        address: "India",
+        businessHours: "Mon-Sat, 10:00 AM - 7:00 PM",
+        aboutTitle: "About Siyu Creativity",
+        aboutText: "Siyu Creativity creates personalized gifting and decor pieces with a soft pastel identity, thoughtful detailing, and a premium handmade finish."
+      } as WebsiteSettings;
+    }
+  },
+  async createContact(payload: { name: string; phone: string; email?: string; message: string; recipientEmail?: string }) {
     const response = await http.post("/public/contact", { ...payload, source: "contact-form" });
     return response.data;
   }

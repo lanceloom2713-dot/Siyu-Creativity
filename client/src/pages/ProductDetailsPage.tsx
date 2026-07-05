@@ -10,6 +10,7 @@ import { createProductWhatsappUrl } from "../utils/whatsapp";
 export function ProductDetailsPage() {
   const { slug = "" } = useParams();
   const { data: product, isLoading } = useQuery({ queryKey: ["public-product", slug], queryFn: () => publicCatalogueApi.getProduct(slug), enabled: Boolean(slug) });
+  const { data: settings } = useQuery({ queryKey: ["public-settings"], queryFn: publicCatalogueApi.getSettings });
   const [activeImage, setActiveImage] = useState("");
 
   useEffect(() => {
@@ -64,7 +65,7 @@ export function ProductDetailsPage() {
           <div className="mt-8 flex flex-wrap gap-3">
             <a
               className="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-semibold text-white"
-              href={createProductWhatsappUrl(product.name)}
+              href={createProductWhatsappUrl(product.name, settings?.whatsapp)}
               target="_blank"
               rel="noreferrer"
             >

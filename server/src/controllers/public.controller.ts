@@ -5,6 +5,7 @@ import { Faq } from "../models/Faq.js";
 import { HomepageSection } from "../models/HomepageSection.js";
 import { Product } from "../models/Product.js";
 import { SeoPage } from "../models/SeoPage.js";
+import { WebsiteSetting } from "../models/WebsiteSetting.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { contactEnquirySchema } from "../validators/contact.validator.js";
 
@@ -65,6 +66,11 @@ export const listFaqs = asyncHandler(async (_req, res) => {
 export const listSeoPages = asyncHandler(async (_req, res) => {
   const seo = await SeoPage.find({ active: true }).sort({ page: 1 });
   res.json({ seo });
+});
+
+export const getWebsiteSettings = asyncHandler(async (_req, res) => {
+  const settings = await WebsiteSetting.findOne({ key: "website" });
+  res.json({ settings: settings?.value ?? {} });
 });
 
 export const createContactEnquiry = asyncHandler(async (req, res) => {

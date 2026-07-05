@@ -10,11 +10,12 @@ export function BlogsPage() {
       <h1 className="font-display text-5xl font-semibold">Blogs</h1>
       <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {blogs.map((blog) => (
-          <Link className="overflow-hidden rounded-[1.5rem] bg-white shadow-soft" to={`/blogs/${blog.slug}`} key={blog.id}>
+          <Link className="flex h-full min-h-[390px] flex-col overflow-hidden rounded-[1.5rem] bg-white shadow-soft" to={`/blogs/${blog.slug}`} key={blog.id}>
             {blog.coverImage ? <img className="aspect-video w-full object-cover" src={blog.coverImage} alt={blog.title} loading="lazy" /> : null}
-            <div className="p-5">
+            <div className="flex flex-1 flex-col p-5">
             <h2 className="font-display text-xl font-semibold leading-tight">{blog.title}</h2>
-            <p className="mt-3 text-sm leading-6 text-ink/60">{blog.excerpt}</p>
+            <p className="mt-3 line-clamp-4 text-sm leading-6 text-ink/60">{blog.excerpt}</p>
+            <span className="mt-auto pt-4 text-sm font-semibold text-ink underline-offset-4 hover:underline">Read more</span>
             </div>
           </Link>
         ))}
