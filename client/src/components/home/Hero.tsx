@@ -1,0 +1,47 @@
+import { motion } from "framer-motion";
+import { Sparkles } from "lucide-react";
+import { Link } from "react-router-dom";
+import logo from "../../assets/siyu-logo.png";
+
+type HeroProps = {
+  title?: string;
+  subtitle?: string;
+  announcement?: string;
+};
+
+export function Hero({ title = "Siyu Creativity", subtitle = "Discover handcrafted gifting and personalized decor designed with soft detail, elegant finishing, and custom enquiry support.", announcement = "Premium custom catalogue" }: HeroProps) {
+  return (
+    <section className="relative overflow-hidden bg-[linear-gradient(135deg,#ffffff_0%,#eef9ff_35%,#f6ecff_70%,#fff7fb_100%)]">
+      <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 pb-16 pt-12 sm:px-6 md:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:pb-20">
+        <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/80 bg-white/70 px-4 py-2 text-sm font-semibold text-ink/70 shadow-soft">
+            <Sparkles size={16} />
+            {announcement}
+          </div>
+          <h1 className="mt-6 font-display text-5xl font-semibold leading-[1.02] text-ink md:text-7xl">
+            {title}
+          </h1>
+          <p className="mt-6 max-w-xl text-lg leading-8 text-ink/68">
+            {subtitle}
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link className="rounded-full bg-ink px-6 py-3 text-sm font-semibold text-white" to="/categories">
+              Explore Catalogue
+            </Link>
+            <Link className="rounded-full border border-ink/15 bg-white/70 px-6 py-3 text-sm font-semibold" to="/contact">
+              Start an Enquiry
+            </Link>
+          </div>
+        </motion.div>
+        <motion.div
+          className="relative mx-auto w-full max-w-md rounded-[2rem] bg-white/65 p-4 shadow-soft backdrop-blur-xl"
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.1, duration: 0.6 }}
+        >
+          <img className="aspect-square w-full rounded-[1.5rem] object-cover" src={logo} alt="Siyu Creativity pastel logo" />
+        </motion.div>
+      </div>
+    </section>
+  );
+}
