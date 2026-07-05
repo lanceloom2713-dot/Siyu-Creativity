@@ -26,7 +26,7 @@ export function Header() {
           ))}
         </nav>
         <Link className="hidden rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-white md:block" to="/contact">
-          Enquire
+          Enquire Now
         </Link>
         <button className="rounded-full border border-ink/10 p-2 md:hidden" type="button" aria-label="Open navigation">
           <Menu size={20} />

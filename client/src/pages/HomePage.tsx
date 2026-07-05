@@ -24,7 +24,7 @@ export function HomePage() {
           title={homepage.featuredCategoryTitle ?? "Curated creative collections"}
           description="Browse by occasion, finish, and personalization style before sending your enquiry."
         />
-        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
           {(home?.categories?.length ? home.categories : home?.featuredCategories ?? []).map((category) => (
             <CategoryCard category={category} key={category.id} />
           ))}
@@ -33,7 +33,7 @@ export function HomePage() {
       <section className="bg-white/70 py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading eyebrow="Products" title={homepage.featuredProductTitle ?? "Featured catalogue pieces"} />
-          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
             {(home?.products?.length ? home.products : home?.featuredProducts ?? []).map((product) => (
               <ProductCard product={product} key={product.id} />
             ))}

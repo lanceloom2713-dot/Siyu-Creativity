@@ -9,3 +9,8 @@ export const createProductWhatsappUrl = (productName: string, whatsappNumber?: s
   const text = `Hello Siyu Creativity, I am interested in ${productName}`;
   return `https://wa.me/${normalizeWhatsappNumber(whatsappNumber)}?text=${encodeURIComponent(text)}`;
 };
+
+export const createWhatsappUrl = (whatsappNumber?: string) => {
+  const text = "Hello Siyu Creativity, I would like to enquire.";
+  return `https://wa.me/${normalizeWhatsappNumber(whatsappNumber)}?text=${encodeURIComponent(text)}`;
+};

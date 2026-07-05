@@ -9,7 +9,7 @@ export function CategoriesPage() {
   return (
     <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
       <SectionHeading title="Categories" description="Explore catalogue collections that can be customized for your occasion." />
-      <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
         {categories.map((category) => (
           <CategoryCard category={category} key={category.id} />
         ))}
