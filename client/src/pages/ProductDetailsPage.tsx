@@ -32,7 +32,7 @@ export function ProductDetailsPage() {
     <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
       <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr]">
         <div className="grid gap-4">
-          <img className="aspect-[4/3] w-full rounded-[2rem] object-cover shadow-soft" src={selectedImage} alt={product.name} />
+          <img className="aspect-[4/3] w-full rounded-[2rem] border border-ink/5 object-cover shadow-soft" src={selectedImage} alt={product.name} />
           <div className="grid grid-cols-4 gap-3">
             {product.gallery.map((item) => (
               <button className={`overflow-hidden rounded-2xl border ${item === selectedImage ? "border-ink" : "border-transparent"}`} key={item} onClick={() => setActiveImage(item)} type="button">
@@ -42,7 +42,7 @@ export function ProductDetailsPage() {
           </div>
           {product.video ? <video className="aspect-video rounded-2xl object-cover shadow-soft" src={product.video} controls /> : null}
         </div>
-        <div>
+        <div className="rounded-[2rem] border border-ink/5 bg-white/70 p-5 shadow-soft backdrop-blur sm:p-7">
           <p className="text-sm font-bold uppercase tracking-[0.24em] text-ink/45">Catalogue product</p>
           <h1 className="mt-3 font-display text-4xl font-semibold leading-tight md:text-5xl">{product.name}</h1>
           <div className="mt-5 whitespace-pre-line text-justify text-base leading-7 text-ink/70">{product.longDescription}</div>
@@ -64,7 +64,7 @@ export function ProductDetailsPage() {
           ) : null}
           <div className="mt-8 flex flex-wrap gap-3">
             <a
-              className="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-semibold text-white"
+              className="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-semibold text-white shadow-soft transition hover:-translate-y-0.5"
               href={createProductWhatsappUrl(product.name, settings?.whatsapp)}
               target="_blank"
               rel="noreferrer"
@@ -72,7 +72,7 @@ export function ProductDetailsPage() {
               <MessageCircle size={17} />
               Enquire on WhatsApp
             </a>
-            <Link className="inline-flex items-center gap-2 rounded-full border border-ink/15 bg-white px-6 py-3 text-sm font-semibold" to="/contact">
+            <Link className="inline-flex items-center gap-2 rounded-full border border-ink/15 bg-white px-6 py-3 text-sm font-semibold shadow-soft transition hover:-translate-y-0.5" to="/contact">
               <Send size={17} />
               Contact Form
             </Link>

@@ -13,10 +13,21 @@ body {
   font-family: Inter, ui-sans-serif, system-ui;
   color: #25222a;
   background: #fbfbfd;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 img {
   max-width: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: #eadfff;
+  color: #25222a;
 }
 
 .line-clamp-4 {

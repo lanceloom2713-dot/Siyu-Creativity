@@ -7,7 +7,7 @@ export function CategoriesPage() {
   const { data: categories = [] } = useQuery({ queryKey: ["public-categories"], queryFn: publicCatalogueApi.getCategories });
 
   return (
-    <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+    <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-16">
       <SectionHeading title="Categories" description="Explore catalogue collections that can be customized for your occasion." />
       <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {categories.map((category) => (

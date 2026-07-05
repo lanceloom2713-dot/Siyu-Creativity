@@ -18,7 +18,7 @@ export function HomePage() {
   return (
     <>
       <Hero title={homepage.heroTitle} subtitle={homepage.heroSubtitle} announcement={homepage.announcement} image={homepage.heroImage} images={splitImages(homepage.heroImages)} />
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
         <SectionHeading
           eyebrow="Featured categories"
           title={homepage.featuredCategoryTitle ?? "Curated creative collections"}
@@ -30,7 +30,7 @@ export function HomePage() {
           ))}
         </div>
       </section>
-      <section className="bg-white/70 py-16">
+      <section className="bg-[linear-gradient(180deg,#ffffff_0%,#f7fbff_100%)] py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading eyebrow="Products" title={homepage.featuredProductTitle ?? "Featured catalogue pieces"} />
           <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
