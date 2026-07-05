@@ -33,7 +33,7 @@ export function Hero({ title = "Siyu Creativity", subtitle = "Discover handcraft
           <h1 className="mt-6 font-display text-4xl font-semibold leading-[1.02] text-ink sm:text-5xl md:text-7xl">
             {title}
           </h1>
-          <p className="mt-6 max-w-xl text-base leading-8 text-ink/68 sm:text-lg">
+          <p className="mt-6 max-w-xl text-justify text-base leading-8 text-ink/68 sm:text-lg">
             {subtitle}
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">

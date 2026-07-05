@@ -23,7 +23,7 @@ export function ProductCard({ product }: { product: Product }) {
         <Link to={`/products/${product.slug}`}>
           <h3 className="mt-4 font-display text-xl font-semibold leading-tight transition group-hover:text-ink/75">{product.name}</h3>
         </Link>
-        <p className="mt-2 line-clamp-4 text-sm leading-6 text-ink/60">{product.shortDescription}</p>
+        <p className="mt-2 line-clamp-4 text-justify text-sm leading-6 text-ink/60">{product.shortDescription}</p>
         <Link className="mt-3 text-sm font-semibold text-ink underline-offset-4 hover:underline" to={`/products/${product.slug}`}>
           Read more
         </Link>

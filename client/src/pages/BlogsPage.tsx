@@ -14,7 +14,7 @@ export function BlogsPage() {
             {blog.coverImage ? <img className="aspect-video w-full object-cover" src={blog.coverImage} alt={blog.title} loading="lazy" /> : null}
             <div className="flex flex-1 flex-col p-5">
             <h2 className="font-display text-xl font-semibold leading-tight">{blog.title}</h2>
-            <p className="mt-3 line-clamp-4 text-sm leading-6 text-ink/60">{blog.excerpt}</p>
+            <p className="mt-3 line-clamp-4 text-justify text-sm leading-6 text-ink/60">{blog.excerpt}</p>
             <span className="mt-auto pt-4 text-sm font-semibold text-ink underline-offset-4 hover:underline">Read more</span>
             </div>
           </Link>

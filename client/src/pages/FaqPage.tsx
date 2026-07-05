@@ -11,7 +11,7 @@ export function FaqPage() {
         {faqs.map((faq) => (
           <details className="rounded-2xl bg-white p-5 shadow-soft" key={faq.id}>
             <summary className="cursor-pointer font-semibold">{faq.question}</summary>
-            <p className="mt-3 text-sm leading-6 text-ink/60">{faq.answer}</p>
+            <p className="mt-3 text-justify text-sm leading-6 text-ink/60">{faq.answer}</p>
           </details>
         ))}
       </div>

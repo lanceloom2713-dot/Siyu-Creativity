@@ -9,7 +9,7 @@ export function CategoryCard({ category }: { category: Category }) {
       </div>
       <div className="flex flex-1 flex-col p-5">
         <h3 className="font-display text-xl font-semibold leading-tight transition group-hover:text-ink/75">{category.name}</h3>
-        <p className="mt-2 line-clamp-5 text-sm leading-6 text-ink/60">{category.description}</p>
+        <p className="mt-2 line-clamp-5 text-justify text-sm leading-6 text-ink/60">{category.description}</p>
         <span className="mt-auto pt-4 text-sm font-semibold text-ink underline-offset-4 group-hover:underline">Read more</span>
       </div>
     </Link>
