@@ -1,11 +1,13 @@
 import { FormEvent, useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { MediaUploadField } from "../components/MediaUploadField";
 import { useToast } from "../components/ToastProvider";
 import { adminCmsApi } from "../services/adminCmsApi";
 
 const defaultHomepage = {
   heroTitle: "Siyu Creativity",
   heroSubtitle: "Discover handcrafted gifting and personalized decor designed with soft detail.",
+  heroImage: "",
   featuredCategoryTitle: "Curated creative collections",
   featuredProductTitle: "Featured catalogue pieces",
   announcement: "Custom catalogue enquiries are open."
@@ -42,6 +44,7 @@ export function HomeBuilderPage() {
       <form className="mt-5 grid max-w-4xl gap-4 rounded-lg bg-panel p-5 shadow-panel" onSubmit={submit}>
         <input className="rounded-lg border border-ink/10 px-4 py-3 text-sm" placeholder="Hero title" value={form.heroTitle ?? ""} onChange={(event) => setForm({ ...form, heroTitle: event.target.value })} />
         <textarea className="min-h-24 rounded-lg border border-ink/10 px-4 py-3 text-sm" placeholder="Hero subtitle" value={form.heroSubtitle ?? ""} onChange={(event) => setForm({ ...form, heroSubtitle: event.target.value })} />
+        <MediaUploadField label="Hero banner image" title="Homepage hero banner" alt="Homepage hero banner" value={form.heroImage ?? ""} onChange={(heroImage) => setForm({ ...form, heroImage })} />
         <input className="rounded-lg border border-ink/10 px-4 py-3 text-sm" placeholder="Featured category heading" value={form.featuredCategoryTitle ?? ""} onChange={(event) => setForm({ ...form, featuredCategoryTitle: event.target.value })} />
         <input className="rounded-lg border border-ink/10 px-4 py-3 text-sm" placeholder="Featured product heading" value={form.featuredProductTitle ?? ""} onChange={(event) => setForm({ ...form, featuredProductTitle: event.target.value })} />
         <input className="rounded-lg border border-ink/10 px-4 py-3 text-sm" placeholder="Announcement" value={form.announcement ?? ""} onChange={(event) => setForm({ ...form, announcement: event.target.value })} />

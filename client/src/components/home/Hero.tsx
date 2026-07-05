@@ -7,9 +7,10 @@ type HeroProps = {
   title?: string;
   subtitle?: string;
   announcement?: string;
+  image?: string;
 };
 
-export function Hero({ title = "Siyu Creativity", subtitle = "Discover handcrafted gifting and personalized decor designed with soft detail, elegant finishing, and custom enquiry support.", announcement = "Premium custom catalogue" }: HeroProps) {
+export function Hero({ title = "Siyu Creativity", subtitle = "Discover handcrafted gifting and personalized decor designed with soft detail, elegant finishing, and custom enquiry support.", announcement = "Premium custom catalogue", image = logo }: HeroProps) {
   return (
     <section className="relative overflow-hidden bg-[linear-gradient(135deg,#ffffff_0%,#eef9ff_35%,#f6ecff_70%,#fff7fb_100%)]">
       <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 pb-16 pt-12 sm:px-6 md:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:pb-20">
@@ -39,7 +40,7 @@ export function Hero({ title = "Siyu Creativity", subtitle = "Discover handcraft
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.1, duration: 0.6 }}
         >
-          <img className="aspect-square w-full rounded-[1.5rem] object-cover" src={logo} alt="Siyu Creativity pastel logo" />
+          <img className="aspect-square w-full rounded-[1.5rem] object-cover" src={image} alt={`${title} hero`} />
         </motion.div>
       </div>
     </section>

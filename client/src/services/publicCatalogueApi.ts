@@ -61,6 +61,7 @@ type ApiHomepageSection = {
   content?: Partial<{
     heroTitle: string;
     heroSubtitle: string;
+    heroImage: string;
     featuredCategoryTitle: string;
     featuredProductTitle: string;
     announcement: string;

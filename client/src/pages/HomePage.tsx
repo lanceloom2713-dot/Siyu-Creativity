@@ -11,7 +11,7 @@ export function HomePage() {
 
   return (
     <>
-      <Hero title={homepage.heroTitle} subtitle={homepage.heroSubtitle} announcement={homepage.announcement} />
+      <Hero title={homepage.heroTitle} subtitle={homepage.heroSubtitle} announcement={homepage.announcement} image={homepage.heroImage} />
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <SectionHeading
           eyebrow="Featured categories"
