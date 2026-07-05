@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { MessageCircle, Send } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
@@ -9,6 +10,11 @@ import { createProductWhatsappUrl } from "../utils/whatsapp";
 export function ProductDetailsPage() {
   const { slug = "" } = useParams();
   const { data: product, isLoading } = useQuery({ queryKey: ["public-product", slug], queryFn: () => publicCatalogueApi.getProduct(slug), enabled: Boolean(slug) });
+  const [activeImage, setActiveImage] = useState("");
+
+  useEffect(() => {
+    if (product?.gallery[0]) setActiveImage(product.gallery[0]);
+  }, [product?.id, product?.gallery]);
 
   if (isLoading) {
     return <section className="mx-auto max-w-7xl px-4 py-20">Loading product...</section>;
@@ -19,23 +25,26 @@ export function ProductDetailsPage() {
   }
 
   const related = fallbackProducts.filter((item) => product.relatedProductSlugs.includes(item.slug));
+  const selectedImage = activeImage || product.gallery[0];
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
       <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr]">
         <div className="grid gap-4">
-          <img className="aspect-[4/3] rounded-[2rem] object-cover shadow-soft" src={product.gallery[0]} alt={product.name} />
-          <div className="grid grid-cols-3 gap-4">
-            {product.gallery.slice(1).map((item) => (
-              <img className="aspect-square rounded-2xl object-cover" src={item} alt={product.name} key={item} />
+          <img className="aspect-[4/3] w-full rounded-[2rem] object-cover shadow-soft" src={selectedImage} alt={product.name} />
+          <div className="grid grid-cols-4 gap-3">
+            {product.gallery.map((item) => (
+              <button className={`overflow-hidden rounded-2xl border ${item === selectedImage ? "border-ink" : "border-transparent"}`} key={item} onClick={() => setActiveImage(item)} type="button">
+                <img className="aspect-square w-full object-cover" src={item} alt={product.name} loading="lazy" />
+              </button>
             ))}
           </div>
           {product.video ? <video className="aspect-video rounded-2xl object-cover shadow-soft" src={product.video} controls /> : null}
         </div>
         <div>
           <p className="text-sm font-bold uppercase tracking-[0.24em] text-ink/45">Catalogue product</p>
-          <h1 className="mt-3 font-display text-5xl font-semibold">{product.name}</h1>
-          <p className="mt-5 text-lg leading-8 text-ink/68">{product.longDescription}</p>
+          <h1 className="mt-3 font-display text-4xl font-semibold leading-tight md:text-5xl">{product.name}</h1>
+          <div className="mt-5 whitespace-pre-line text-justify text-base leading-7 text-ink/70">{product.longDescription}</div>
           <div className="mt-8 grid gap-3">
             {product.features.map((feature) => (
               <div className="rounded-2xl border border-ink/10 bg-white p-4 text-sm font-medium" key={feature}>
@@ -72,7 +81,7 @@ export function ProductDetailsPage() {
       {related.length ? (
         <div className="mt-16">
           <h2 className="font-display text-4xl font-semibold">Related products</h2>
-          <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {related.map((item) => (
               <ProductCard product={item} key={item.id} />
             ))}

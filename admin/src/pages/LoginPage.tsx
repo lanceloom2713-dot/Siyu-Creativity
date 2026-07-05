@@ -6,7 +6,7 @@ import { useAuthStore } from "../store/authStore";
 export function LoginPage() {
   const setToken = useAuthStore((state) => state.setToken);
   const navigate = useNavigate();
-  const [form, setForm] = useState({ email: "admin@siyucreativity.com", password: "Admin@12345" });
+  const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -27,11 +27,11 @@ export function LoginPage() {
 
   return (
     <main className="grid min-h-screen place-items-center bg-shell px-4">
-      <form className="w-full max-w-md rounded-lg bg-panel p-8 shadow-panel" onSubmit={submit}>
+      <form className="w-full max-w-md rounded-lg bg-panel p-8 shadow-panel" onSubmit={submit} autoComplete="off">
         <h1 className="text-2xl font-bold">Admin Login</h1>
         <div className="mt-6 grid gap-4">
-          <input className="rounded-lg border border-ink/10 px-4 py-3" onChange={(event) => setForm({ ...form, email: event.target.value })} placeholder="Email" type="email" value={form.email} />
-          <input className="rounded-lg border border-ink/10 px-4 py-3" onChange={(event) => setForm({ ...form, password: event.target.value })} placeholder="Password" type="password" value={form.password} />
+          <input autoComplete="off" className="rounded-lg border border-ink/10 px-4 py-3" onChange={(event) => setForm({ ...form, email: event.target.value })} placeholder="Email" type="email" value={form.email} />
+          <input autoComplete="new-password" className="rounded-lg border border-ink/10 px-4 py-3" onChange={(event) => setForm({ ...form, password: event.target.value })} placeholder="Password" type="password" value={form.password} />
         </div>
         <button className="mt-6 w-full rounded-lg bg-ink px-4 py-3 text-sm font-semibold text-white" disabled={loading} type="submit">
           {loading ? "Signing In..." : "Sign In"}

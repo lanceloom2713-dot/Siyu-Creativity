@@ -2,6 +2,7 @@ import { FormEvent, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { ActionTable } from "../components/ActionTable";
 import { MediaUploadField } from "../components/MediaUploadField";
+import { MultiMediaUploadField } from "../components/MultiMediaUploadField";
 import { useToast } from "../components/ToastProvider";
 import { adminCmsApi } from "../services/adminCmsApi";
 
@@ -10,7 +11,7 @@ const emptyProductForm = {
   category: "",
   shortDescription: "",
   longDescription: "",
-  imageUrl: "",
+  imageUrls: "",
   videoUrl: "",
   features: "",
   tags: "",
@@ -78,7 +79,7 @@ export function ProductManagerPage() {
       categoryName: form.category,
       shortDescription: form.shortDescription,
       longDescription: form.longDescription,
-      imageUrl: form.imageUrl,
+      imageUrls: form.imageUrls,
       videoUrl: form.videoUrl,
       features: form.features,
       tags: form.tags,
@@ -102,7 +103,7 @@ export function ProductManagerPage() {
       <textarea className="min-h-24 rounded-lg border border-ink/10 px-4 py-3 text-sm lg:col-span-2" placeholder="Short description" value={state.shortDescription} onChange={(event) => setState({ ...state, shortDescription: event.target.value })} />
       <textarea className="min-h-28 rounded-lg border border-ink/10 px-4 py-3 text-sm lg:col-span-2" placeholder="Long description" value={state.longDescription} onChange={(event) => setState({ ...state, longDescription: event.target.value })} />
       <div className="lg:col-span-2">
-        <MediaUploadField label="Product image" title={state.name} alt={state.name} value={state.imageUrl} onChange={(imageUrl) => setState({ ...state, imageUrl })} />
+        <MultiMediaUploadField label="Product images" title={state.name} alt={state.name} value={state.imageUrls} onChange={(imageUrls) => setState({ ...state, imageUrls })} />
       </div>
       <div className="lg:col-span-2">
         <MediaUploadField label="Product video" title={`${state.name} video`} alt={`${state.name} video`} value={state.videoUrl} onChange={(videoUrl) => setState({ ...state, videoUrl })} />
@@ -165,7 +166,7 @@ export function ProductManagerPage() {
                 category: "",
                 shortDescription: product.shortDescription,
                 longDescription: product.longDescription ?? product.shortDescription,
-                imageUrl: product.gallery?.[0]?.url ?? "",
+                imageUrls: product.gallery?.map((item) => item.url).join("\n") ?? "",
                 videoUrl: product.video?.url ?? "",
                 features: product.features?.join(", ") ?? "",
                 tags: product.tags?.join(", ") ?? "",
@@ -194,7 +195,7 @@ export function ProductManagerPage() {
                   name: editingProduct.name,
                   shortDescription: editingProduct.shortDescription,
                   longDescription: editingProduct.longDescription,
-                  imageUrl: editingProduct.imageUrl,
+                  imageUrls: editingProduct.imageUrls,
                   videoUrl: editingProduct.videoUrl,
                   features: editingProduct.features,
                   tags: editingProduct.tags,

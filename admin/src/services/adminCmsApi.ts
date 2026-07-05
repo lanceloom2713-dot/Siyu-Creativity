@@ -124,6 +124,7 @@ export const adminCmsApi = {
     shortDescription: string;
     longDescription?: string;
     imageUrl?: string;
+    imageUrls?: string;
     videoUrl?: string;
     features?: string;
     tags?: string;

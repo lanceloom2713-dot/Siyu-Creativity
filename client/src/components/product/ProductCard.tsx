@@ -8,7 +8,7 @@ export function ProductCard({ product }: { product: Product }) {
     <article className="overflow-hidden rounded-[1.5rem] bg-white shadow-soft">
       <Link to={`/products/${product.slug}`}>
         <div className="aspect-[4/3] overflow-hidden">
-          <img className="h-full w-full object-cover transition duration-500 hover:scale-105" src={product.gallery[0]} alt={product.name} />
+          <img className="h-full w-full object-cover transition duration-500 hover:scale-105" src={product.gallery[0]} alt={product.name} loading="lazy" />
         </div>
       </Link>
       <div className="p-5">
@@ -17,7 +17,7 @@ export function ProductCard({ product }: { product: Product }) {
           {product.featured ? <span className="rounded-full bg-mint px-3 py-1 text-xs font-semibold">Featured</span> : null}
         </div>
         <Link to={`/products/${product.slug}`}>
-          <h3 className="mt-4 font-display text-2xl font-semibold">{product.name}</h3>
+          <h3 className="mt-4 font-display text-xl font-semibold leading-tight">{product.name}</h3>
         </Link>
         <p className="mt-2 text-sm leading-6 text-ink/60">{product.shortDescription}</p>
         <a

@@ -62,6 +62,7 @@ type ApiHomepageSection = {
     heroTitle: string;
     heroSubtitle: string;
     heroImage: string;
+    heroImages: string;
     featuredCategoryTitle: string;
     featuredProductTitle: string;
     announcement: string;

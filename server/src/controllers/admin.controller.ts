@@ -26,9 +26,19 @@ const splitList = (value: unknown) =>
   Array.isArray(value)
     ? value
     : String(value ?? "")
-        .split(",")
+        .split(/\r?\n|,/)
         .map((item) => item.trim())
         .filter(Boolean);
+
+const makeGallery = (value: unknown, alt: string) => {
+  if (Array.isArray(value)) {
+    return value
+      .map((item) => (typeof item === "string" ? { url: item, alt, type: "image" } : item))
+      .filter((item: any) => item?.url);
+  }
+
+  return splitList(value).map((url) => ({ url: String(url), alt, type: "image" }));
+};
 
 const normalizePayload = async (label: string, body: Record<string, unknown>) => {
   if (label === "products") {
@@ -37,6 +47,8 @@ const normalizePayload = async (label: string, body: Record<string, unknown>) =>
     const longDescription = String(body.longDescription ?? shortDescription);
     const categoryName = String(body.categoryName ?? body.category ?? "");
     const category = categoryName ? await Category.findOne({ name: categoryName }) : null;
+    const gallery = makeGallery(body.imageUrls ?? body.imageUrl ?? body.gallery, name);
+
     return {
       ...body,
       sku: body.sku ?? makeSku(name),
@@ -44,11 +56,7 @@ const normalizePayload = async (label: string, body: Record<string, unknown>) =>
       slug: body.slug ?? createSlug(name),
       shortDescription,
       longDescription,
-      gallery: body.imageUrl
-        ? [{ url: String(body.imageUrl), alt: name, type: "image" }]
-        : Array.isArray(body.gallery) && body.gallery.length
-          ? body.gallery
-          : [defaultImage],
+      gallery: gallery.length ? gallery : [defaultImage],
       video: body.videoUrl ? { url: String(body.videoUrl), alt: `${name} video`, type: "video" } : body.video,
       features: splitList(body.features),
       tags: splitList(body.tags),
