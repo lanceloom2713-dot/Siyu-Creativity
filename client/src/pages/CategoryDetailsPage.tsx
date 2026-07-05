@@ -27,7 +27,7 @@ export function CategoryDetailsPage() {
           <p className="mt-3 max-w-2xl text-white/82">{category.description}</p>
         </div>
       </div>
-      <div className="mx-auto grid max-w-7xl gap-5 px-4 py-12 sm:px-6 sm:grid-cols-2 lg:grid-cols-4 lg:px-8 xl:grid-cols-5">
+      <div className="mx-auto grid max-w-7xl gap-5 px-4 py-12 sm:px-6 sm:grid-cols-2 lg:grid-cols-4 lg:px-8">
         {products.map((product) => (
           <ProductCard product={product} key={product.id} />
         ))}
