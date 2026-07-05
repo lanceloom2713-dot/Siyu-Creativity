@@ -2,26 +2,30 @@ import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { publicCatalogueApi } from "../../services/publicCatalogueApi";
+import logo from "../../assets/siyu-logo.png";
 
 export function Footer() {
   const { data: settings } = useQuery({ queryKey: ["public-settings"], queryFn: publicCatalogueApi.getSettings });
 
   return (
-    <footer className="border-t border-ink/10 bg-white">
+    <footer className="border-t border-ink/10 bg-[linear-gradient(180deg,#ffffff_0%,#f7fbff_55%,#fff7fb_100%)]">
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:px-6 md:grid-cols-4 lg:px-8">
         <div className="md:col-span-2">
-          <p className="font-display text-3xl font-semibold">Siyu Creativity</p>
+          <Link className="inline-flex items-center gap-3" to="/">
+            <img className="h-16 w-16 rounded-2xl border border-white bg-white object-cover shadow-soft" src={logo} alt="Siyu Creativity logo" />
+            <span className="font-display text-3xl font-semibold">Siyu Creativity</span>
+          </Link>
           <p className="mt-3 max-w-md text-sm leading-6 text-ink/65">
             Premium handcrafted catalogue experiences for thoughtful gifting, decor, and customized creative products.
           </p>
-          <div className="mt-5 grid gap-2 text-sm text-ink/65">
-            <p className="flex items-center gap-2"><MessageCircle size={16} /> {settings?.whatsapp ?? "+91 99999 99999"}</p>
-            <p className="flex items-center gap-2"><Mail size={16} /> {settings?.email ?? "hello@siyucreativity.com"}</p>
+          <div className="mt-5 grid max-w-lg gap-3 text-sm text-ink/65 sm:grid-cols-2">
+            <p className="flex items-center gap-2 rounded-2xl bg-white/70 px-4 py-3 shadow-soft"><MessageCircle size={16} /> {settings?.whatsapp ?? "+91 99999 99999"}</p>
+            <p className="flex items-center gap-2 rounded-2xl bg-white/70 px-4 py-3 shadow-soft"><Mail size={16} /> {settings?.email ?? "hello@siyucreativity.com"}</p>
           </div>
         </div>
         <div>
-          <p className="font-semibold">Explore</p>
-          <div className="mt-3 grid gap-2 text-sm text-ink/65">
+          <p className="text-sm font-bold uppercase tracking-[0.16em] text-ink/45">Explore</p>
+          <div className="mt-4 grid gap-3 text-sm font-medium text-ink/65">
             <Link to="/categories">Categories</Link>
             <Link to="/blogs">Blogs</Link>
             <Link to="/about">About</Link>
@@ -29,16 +33,16 @@ export function Footer() {
           </div>
         </div>
         <div>
-          <p className="font-semibold">Contact</p>
-          <div className="mt-3 grid gap-2 text-sm text-ink/65">
+          <p className="text-sm font-bold uppercase tracking-[0.16em] text-ink/45">Contact</p>
+          <div className="mt-4 grid gap-3 text-sm font-medium text-ink/65">
             <Link to="/faqs">FAQs</Link>
             <p className="flex items-center gap-2"><Phone size={16} /> {settings?.phone ?? "+91 99999 99999"}</p>
             <p className="flex items-center gap-2"><MapPin size={16} /> {settings?.address ?? "India"}</p>
           </div>
         </div>
       </div>
-      <div className="border-t border-ink/10 px-4 py-4 text-center text-xs font-semibold uppercase tracking-[0.18em] text-ink/45">
-        All rights reserved to Siyu Creativity.
+      <div className="border-t border-ink/10 bg-white/45 px-4 py-4 text-center text-xs font-semibold uppercase tracking-[0.18em] text-ink/45">
+        All rights reserved to Siyu Creativity
       </div>
     </footer>
   );
