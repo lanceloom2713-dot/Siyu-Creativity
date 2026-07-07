@@ -7,6 +7,7 @@ export function ContactPage() {
   const { data: settings } = useQuery({ queryKey: ["public-settings"], queryFn: publicCatalogueApi.getSettings });
   const [form, setForm] = useState({ name: "", phone: "", email: "", message: "" });
   const [sent, setSent] = useState(false);
+  const [formError, setFormError] = useState("");
   const mutation = useMutation({
     mutationFn: publicCatalogueApi.createContact,
     onSuccess: () => {
@@ -17,7 +18,20 @@ export function ContactPage() {
 
   const submit = (event: FormEvent) => {
     event.preventDefault();
-    if (!form.name.trim() || !form.phone.trim() || !form.message.trim()) return;
+    setSent(false);
+    setFormError("");
+    if (form.name.trim().length < 2) {
+      setFormError("Please enter your name.");
+      return;
+    }
+    if (form.phone.trim().length < 8) {
+      setFormError("Please enter a valid phone number.");
+      return;
+    }
+    if (form.message.trim().length < 3) {
+      setFormError("Please write a short enquiry message.");
+      return;
+    }
     mutation.mutate({ ...form, recipientEmail: settings?.enquiryEmail ?? settings?.email });
   };
 
@@ -45,6 +59,7 @@ export function ContactPage() {
         <button className="mt-5 rounded-full bg-ink px-6 py-3 text-sm font-semibold text-white" type="submit">
           {mutation.isPending ? "Sending..." : "Send Enquiry"}
         </button>
+        {formError ? <p className="mt-4 text-sm font-semibold text-red-600">{formError}</p> : null}
         {sent ? <p className="mt-4 text-sm font-semibold text-green-700">Enquiry sent. We will contact you soon.</p> : null}
         {mutation.isError ? <p className="mt-4 text-sm font-semibold text-red-600">Could not send enquiry. Please try WhatsApp.</p> : null}
       </form>

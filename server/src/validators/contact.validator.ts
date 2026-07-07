@@ -5,7 +5,7 @@ export const contactEnquirySchema = z.object({
   phone: z.string().min(8),
   email: z.string().email().optional().or(z.literal("")),
   recipientEmail: z.string().email().optional().or(z.literal("")),
-  message: z.string().min(10),
+  message: z.string().min(3),
   product: z.string().optional(),
   source: z.enum(["contact-form", "product-form", "whatsapp"]).optional()
 });
