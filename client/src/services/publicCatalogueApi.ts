@@ -24,7 +24,7 @@ type ApiProduct = {
   name: string;
   slug: string;
   shortDescription: string;
-  longDescription: string;
+  longDescription?: string;
   gallery?: MediaAsset[];
   video?: MediaAsset;
   features?: string[];
@@ -43,7 +43,7 @@ type ApiBlog = {
   title: string;
   slug: string;
   excerpt: string;
-  content: string;
+  content?: string;
   coverImage?: string;
   status: Blog["status"] | "active";
   tags?: string[];
@@ -92,6 +92,12 @@ export type ApiSeoPage = {
 
 const fallbackImage = "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=1200&q=80";
 
+export const optimizeImageUrl = (url: string, width = 900) => {
+  if (!url.includes("res.cloudinary.com") || !url.includes("/upload/")) return url;
+  if (/\/upload\/[^/]*(?:f_auto|q_auto|w_)/.test(url)) return url;
+  return url.replace("/upload/", `/upload/f_auto,q_auto,w_${width},c_limit/`);
+};
+
 const mapSeo = (title: string, description: string, seo?: Product["seo"]) =>
   seo ?? {
     metaTitle: `${title} | Siyu Creativity`,
@@ -104,8 +110,8 @@ const mapCategory = (category: ApiCategory): Category => ({
   name: category.name,
   slug: category.slug,
   description: category.description,
-  image: category.image?.url ?? fallbackImage,
-  banner: category.banner?.url ?? category.image?.url ?? fallbackImage,
+  image: optimizeImageUrl(category.image?.url ?? fallbackImage, 700),
+  banner: optimizeImageUrl(category.banner?.url ?? category.image?.url ?? fallbackImage, 1200),
   featured: category.featured,
   displayOrder: category.displayOrder ?? 0,
   seo: mapSeo(category.name, category.description, category.seo)
@@ -116,8 +122,8 @@ const mapProduct = (product: ApiProduct): Product => ({
   name: product.name,
   slug: product.slug,
   shortDescription: product.shortDescription,
-  longDescription: product.longDescription,
-  gallery: product.gallery?.length ? product.gallery.map((item) => item.url) : [fallbackImage],
+  longDescription: product.longDescription ?? "",
+  gallery: product.gallery?.length ? product.gallery.map((item) => optimizeImageUrl(item.url, 900)) : [fallbackImage],
   video: product.video?.url,
   features: product.features ?? [],
   tags: product.tags ?? [],
@@ -135,8 +141,8 @@ const mapBlog = (blog: ApiBlog): Blog => ({
   title: blog.title,
   slug: blog.slug,
   excerpt: blog.excerpt,
-  content: blog.content,
-  coverImage: blog.coverImage,
+  content: blog.content ?? blog.excerpt,
+  coverImage: blog.coverImage ? optimizeImageUrl(blog.coverImage, 1200) : undefined,
   status: blog.status === "active" ? "published" : blog.status,
   tags: blog.tags ?? [],
   seo: mapSeo(blog.title, blog.excerpt, blog.seo)

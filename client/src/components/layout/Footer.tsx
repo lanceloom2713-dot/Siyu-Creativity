@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Facebook, Instagram, MapPin, Phone } from "lucide-react";
 import { publicCatalogueApi } from "../../services/publicCatalogueApi";
-import logo from "../../assets/siyu-logo.png";
+import logo from "../../assets/siyu-logo.jpg";
 
 const socialLinks = [
   {

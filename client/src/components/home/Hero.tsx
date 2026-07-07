@@ -1,8 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
-import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
-import logo from "../../assets/siyu-logo.png";
+import logo from "../../assets/siyu-logo.jpg";
 
 type HeroProps = {
   title?: string;
@@ -32,7 +31,7 @@ export function Hero({ title = "Siyu Creativity", subtitle = "Discover handcraft
   return (
     <section className="relative overflow-hidden bg-[linear-gradient(135deg,#ffffff_0%,#eef9ff_35%,#f6ecff_70%,#fff7fb_100%)]">
       <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 pb-16 pt-12 sm:px-6 md:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:pb-20 lg:pt-16">
-        <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+        <div className="animate-rise-in">
           <div className="inline-flex max-w-full items-center gap-2 rounded-full border border-white/80 bg-white/75 px-4 py-2 text-sm font-semibold text-ink/70 shadow-soft backdrop-blur">
             <Sparkles size={16} />
             <span className="leading-6">{announcement}</span>
@@ -51,15 +50,10 @@ export function Hero({ title = "Siyu Creativity", subtitle = "Discover handcraft
               Start an Enquiry
             </Link>
           </div>
-        </motion.div>
-        <motion.div
-          className="relative mx-auto w-full max-w-md rounded-[2rem] border border-white/80 bg-white/65 p-3 shadow-soft backdrop-blur-xl sm:p-4"
-          initial={{ opacity: 0, scale: 0.96 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.1, duration: 0.6 }}
-        >
+        </div>
+        <div className="animate-scale-in relative mx-auto w-full max-w-md rounded-[2rem] border border-white/80 bg-white/65 p-3 shadow-soft backdrop-blur-xl sm:p-4">
           {activeImage ? (
-            <img className="aspect-square w-full rounded-[1.5rem] object-cover transition-opacity duration-500" src={activeImage} alt={`${title} hero`} fetchPriority="high" />
+            <img className="aspect-square w-full rounded-[1.5rem] object-cover transition-opacity duration-500" src={activeImage} alt={`${title} hero`} fetchPriority="high" decoding="async" sizes="(min-width: 768px) 40vw, 100vw" />
           ) : (
             <div className="aspect-square w-full animate-pulse rounded-[1.5rem] bg-white/80" />
           )}
@@ -76,7 +70,7 @@ export function Hero({ title = "Siyu Creativity", subtitle = "Discover handcraft
               ))}
             </div>
           ) : null}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

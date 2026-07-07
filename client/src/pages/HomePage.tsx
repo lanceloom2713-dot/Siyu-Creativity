@@ -3,7 +3,7 @@ import { CategoryCard } from "../components/category/CategoryCard";
 import { SectionHeading } from "../components/common/SectionHeading";
 import { Hero } from "../components/home/Hero";
 import { ProductCard } from "../components/product/ProductCard";
-import { publicCatalogueApi } from "../services/publicCatalogueApi";
+import { optimizeImageUrl, publicCatalogueApi } from "../services/publicCatalogueApi";
 
 const splitImages = (value?: string) =>
   String(value ?? "")
@@ -17,7 +17,14 @@ export function HomePage() {
 
   return (
     <>
-      <Hero title={homepage.heroTitle} subtitle={homepage.heroSubtitle} announcement={homepage.announcement} image={homepage.heroImage} images={splitImages(homepage.heroImages)} loading={isLoading} />
+      <Hero
+        title={homepage.heroTitle}
+        subtitle={homepage.heroSubtitle}
+        announcement={homepage.announcement}
+        image={homepage.heroImage ? optimizeImageUrl(homepage.heroImage, 1200) : undefined}
+        images={splitImages(homepage.heroImages).map((item) => optimizeImageUrl(item, 1200))}
+        loading={isLoading}
+      />
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
         <SectionHeading
           eyebrow="Featured categories"
