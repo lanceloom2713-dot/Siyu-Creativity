@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { Facebook, Instagram, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { Facebook, Instagram, MapPin, Phone } from "lucide-react";
 import { publicCatalogueApi } from "../../services/publicCatalogueApi";
 import logo from "../../assets/siyu-logo.png";
 
@@ -31,10 +31,6 @@ export function Footer() {
           <p className="mt-3 max-w-md text-sm leading-6 text-ink/65">
             Premium handcrafted catalogue experiences for thoughtful gifting, decor, and customized creative products.
           </p>
-          <div className="mt-5 grid max-w-lg gap-3 text-sm text-ink/65 sm:grid-cols-2">
-            <p className="flex items-center gap-2 rounded-2xl bg-white/70 px-4 py-3 shadow-soft"><MessageCircle size={16} /> {settings?.whatsapp ?? "+91 99999 99999"}</p>
-            <p className="flex items-center gap-2 rounded-2xl bg-white/70 px-4 py-3 shadow-soft"><Mail size={16} /> {settings?.email ?? "siyucreativity11@gmail.com"}</p>
-          </div>
           <div className="mt-5 flex flex-wrap gap-3">
             {socialLinks.map(({ href, Icon, label }) => (
               <a
@@ -65,7 +61,7 @@ export function Footer() {
           <div className="mt-4 grid gap-3 text-sm font-medium text-ink/65">
             <Link to="/faqs">FAQs</Link>
             <p className="flex items-center gap-2"><Phone size={16} /> {settings?.phone ?? "+91 99999 99999"}</p>
-            <p className="flex items-center gap-2"><MapPin size={16} /> {settings?.address ?? "India"}</p>
+            <p className="flex items-center gap-2"><MapPin size={16} /> {settings?.address ?? "Ghaziabad, India"}</p>
           </div>
         </div>
       </div>

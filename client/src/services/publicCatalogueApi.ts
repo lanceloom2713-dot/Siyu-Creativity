@@ -252,7 +252,7 @@ export const publicCatalogueApi = {
         phone: "+91 99999 99999",
         email: "siyucreativity11@gmail.com",
         enquiryEmail: "siyucreativity11@gmail.com",
-        address: "India",
+        address: "Ghaziabad, India",
         businessHours: "Mon-Sat, 10:00 AM - 7:00 PM",
         aboutTitle: "About Siyu Creativity",
         aboutText: "Siyu Creativity creates personalized gifting and decor pieces with a soft pastel identity, thoughtful detailing, and a premium handmade finish."

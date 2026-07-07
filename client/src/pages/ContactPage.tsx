@@ -43,7 +43,7 @@ export function ContactPage() {
           <p className="flex items-center gap-3"><MessageCircle size={18} /> WhatsApp: {settings?.whatsapp ?? "+91 99999 99999"}</p>
           <p className="flex items-center gap-3"><Phone size={18} /> Phone: {settings?.phone ?? "+91 99999 99999"}</p>
           <p className="flex items-center gap-3"><Mail size={18} /> {settings?.email ?? "siyucreativity11@gmail.com"}</p>
-          <p className="flex items-center gap-3"><MapPin size={18} /> {settings?.address ?? "India"}</p>
+          <p className="flex items-center gap-3"><MapPin size={18} /> {settings?.address ?? "Ghaziabad, India"}</p>
           {settings?.enquiryEmail && settings.enquiryEmail !== settings?.email ? (
             <p className="flex items-center gap-3"><Mail size={18} /> Enquiries: {settings.enquiryEmail}</p>
           ) : null}
