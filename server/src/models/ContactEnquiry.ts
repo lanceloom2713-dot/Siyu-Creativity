@@ -9,6 +9,8 @@ const ContactEnquirySchema = new Schema(
     message: { type: String, required: true },
     product: { type: Schema.Types.ObjectId, ref: "Product" },
     source: { type: String, enum: ["contact-form", "product-form", "whatsapp"], default: "contact-form" },
+    emailSent: { type: Boolean, default: false },
+    emailError: { type: String, trim: true },
     status: { type: String, enum: ["new", "contacted", "closed"], default: "new" }
   },
   { timestamps: true }

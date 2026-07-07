@@ -81,13 +81,22 @@ export const createContactEnquiry = asyncHandler(async (req, res) => {
   const enquiry = await ContactEnquiry.create({ ...payload, recipientEmail });
 
   let emailSent = false;
+  let emailError = "";
   if (recipientEmail) {
     try {
       const result = await sendContactEnquiryEmail({ ...payload, recipientEmail });
       emailSent = result.sent;
+      emailError = result.sent ? "" : result.reason ?? "Email provider did not send the message";
     } catch (error) {
-      console.warn(error);
+      emailError = error instanceof Error ? error.message : "Email send failed";
+      console.warn(emailError);
     }
+  }
+
+  if (emailSent || emailError) {
+    enquiry.emailSent = emailSent;
+    enquiry.emailError = emailError;
+    await enquiry.save();
   }
 
   res.status(201).json({ enquiry, emailSent });

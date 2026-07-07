@@ -92,6 +92,9 @@ export type ApiEnquiry = {
   phone: string;
   email?: string;
   message: string;
+  recipientEmail?: string;
+  emailSent?: boolean;
+  emailError?: string;
   status: "new" | "contacted" | "closed";
   updatedAt: string;
 };

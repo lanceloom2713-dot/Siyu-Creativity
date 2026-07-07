@@ -16,10 +16,10 @@ const escapeHtml = (value: string) =>
 
 export const sendContactEnquiryEmail = async (payload: ContactEmailPayload) => {
   const apiKey = process.env.RESEND_API_KEY;
-  const fromEmail = process.env.ENQUIRY_FROM_EMAIL;
+  const fromEmail = process.env.ENQUIRY_FROM_EMAIL || "Siyu Creativity <onboarding@resend.dev>";
 
-  if (!apiKey || !fromEmail) {
-    return { sent: false, reason: "Email provider is not configured" };
+  if (!apiKey) {
+    return { sent: false, reason: "RESEND_API_KEY is not configured" };
   }
 
   const html = `
@@ -53,5 +53,6 @@ export const sendContactEnquiryEmail = async (payload: ContactEmailPayload) => {
     throw new Error(`Email send failed: ${detail}`);
   }
 
-  return { sent: true };
+  const data = (await response.json().catch(() => ({}))) as { id?: string };
+  return { sent: true, id: data.id };
 };

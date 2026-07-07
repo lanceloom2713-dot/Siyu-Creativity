@@ -40,7 +40,7 @@ export function EnquiriesPage() {
           rows={enquiries.map((enquiry) => ({
             id: enquiry._id,
             title: `${enquiry.name} | ${enquiry.phone}`,
-            subtitle: `${enquiry.email ?? "No email"} | ${enquiry.message}`,
+            subtitle: `${enquiry.email ?? "No email"} | Mail: ${enquiry.emailSent ? "sent" : enquiry.emailError ? "failed" : "pending"} | ${enquiry.message}`,
             status: enquiry.status,
             updatedAt: new Date(enquiry.updatedAt).toLocaleDateString("en-IN")
           }))}
@@ -69,6 +69,11 @@ export function EnquiriesPage() {
               </button>
             </div>
             <p className="mt-5 rounded-lg bg-shell p-4 text-sm leading-6">{selected.message}</p>
+            <div className="mt-4 rounded-lg border border-ink/10 bg-white p-4 text-sm text-muted">
+              <p><strong className="text-ink">Recipient:</strong> {selected.recipientEmail ?? "Not set"}</p>
+              <p className="mt-1"><strong className="text-ink">Email status:</strong> {selected.emailSent ? "Sent" : "Not sent"}</p>
+              {selected.emailError ? <p className="mt-1 text-red-600"><strong>Error:</strong> {selected.emailError}</p> : null}
+            </div>
             <div className="mt-5 grid gap-3 sm:grid-cols-3">
               <a className="inline-flex items-center justify-center gap-2 rounded-lg border border-ink/10 px-4 py-3 text-sm font-semibold" href={`tel:${selected.phone}`}>
                 <Phone size={16} />
