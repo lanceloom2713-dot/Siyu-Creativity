@@ -143,7 +143,7 @@ export const useCmsStore = create<CmsState>()(
       settings: {
         whatsapp: "+91 99999 99999",
         phone: "+91 99999 99999",
-        email: "hello@siyucreativity.com",
+        email: "siyucreativity11@gmail.com",
         businessHours: "Mon-Sat, 10:00 AM - 7:00 PM"
       },
       addProduct: (product) =>

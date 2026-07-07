@@ -20,7 +20,7 @@ export function Footer() {
           </p>
           <div className="mt-5 grid max-w-lg gap-3 text-sm text-ink/65 sm:grid-cols-2">
             <p className="flex items-center gap-2 rounded-2xl bg-white/70 px-4 py-3 shadow-soft"><MessageCircle size={16} /> {settings?.whatsapp ?? "+91 99999 99999"}</p>
-            <p className="flex items-center gap-2 rounded-2xl bg-white/70 px-4 py-3 shadow-soft"><Mail size={16} /> {settings?.email ?? "hello@siyucreativity.com"}</p>
+            <p className="flex items-center gap-2 rounded-2xl bg-white/70 px-4 py-3 shadow-soft"><Mail size={16} /> {settings?.email ?? "siyucreativity11@gmail.com"}</p>
           </div>
         </div>
         <div>

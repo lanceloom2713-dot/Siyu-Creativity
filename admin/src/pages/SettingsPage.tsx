@@ -6,8 +6,8 @@ import { adminCmsApi } from "../services/adminCmsApi";
 const defaultSettings = {
   whatsapp: "+91 99999 99999",
   phone: "+91 99999 99999",
-  email: "hello@siyucreativity.com",
-  enquiryEmail: "hello@siyucreativity.com",
+  email: "siyucreativity11@gmail.com",
+  enquiryEmail: "siyucreativity11@gmail.com",
   address: "India",
   businessHours: "Mon-Sat, 10:00 AM - 7:00 PM",
   aboutTitle: "About Siyu Creativity",

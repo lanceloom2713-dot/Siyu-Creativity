@@ -77,7 +77,7 @@ export const getWebsiteSettings = asyncHandler(async (_req, res) => {
 export const createContactEnquiry = asyncHandler(async (req, res) => {
   const payload = contactEnquirySchema.parse(req.body);
   const settings = await WebsiteSetting.findOne({ key: "website" });
-  const recipientEmail = String(payload.recipientEmail || settings?.value?.enquiryEmail || settings?.value?.email || process.env.ENQUIRY_TO_EMAIL || "");
+  const recipientEmail = String(process.env.ENQUIRY_TO_EMAIL || settings?.value?.enquiryEmail || settings?.value?.email || "siyucreativity11@gmail.com");
   const enquiry = await ContactEnquiry.create({ ...payload, recipientEmail });
 
   let emailSent = false;
