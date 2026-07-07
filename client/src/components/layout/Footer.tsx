@@ -1,8 +1,21 @@
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { Facebook, Instagram, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { publicCatalogueApi } from "../../services/publicCatalogueApi";
 import logo from "../../assets/siyu-logo.png";
+
+const socialLinks = [
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/siyu_creativity__?igsh=eHhvaGJ0ZzltdTJ1&utm_source=qr",
+    Icon: Instagram
+  },
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/share/17ePyzymYt/?mibextid=wwXIfr",
+    Icon: Facebook
+  }
+];
 
 export function Footer() {
   const { data: settings } = useQuery({ queryKey: ["public-settings"], queryFn: publicCatalogueApi.getSettings });
@@ -21,6 +34,21 @@ export function Footer() {
           <div className="mt-5 grid max-w-lg gap-3 text-sm text-ink/65 sm:grid-cols-2">
             <p className="flex items-center gap-2 rounded-2xl bg-white/70 px-4 py-3 shadow-soft"><MessageCircle size={16} /> {settings?.whatsapp ?? "+91 99999 99999"}</p>
             <p className="flex items-center gap-2 rounded-2xl bg-white/70 px-4 py-3 shadow-soft"><Mail size={16} /> {settings?.email ?? "siyucreativity11@gmail.com"}</p>
+          </div>
+          <div className="mt-5 flex flex-wrap gap-3">
+            {socialLinks.map(({ href, Icon, label }) => (
+              <a
+                aria-label={`Open Siyu Creativity on ${label}`}
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-ink/10 bg-white/80 text-ink shadow-soft transition hover:-translate-y-0.5 hover:bg-ink hover:text-white"
+                href={href}
+                key={label}
+                rel="noreferrer"
+                target="_blank"
+                title={label}
+              >
+                <Icon size={18} />
+              </a>
+            ))}
           </div>
         </div>
         <div>
