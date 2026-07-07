@@ -6,6 +6,7 @@ import { HomepageSection } from "../models/HomepageSection.js";
 import { Product } from "../models/Product.js";
 import { SeoPage } from "../models/SeoPage.js";
 import { WebsiteSetting } from "../models/WebsiteSetting.js";
+import { sendContactEnquiryEmail } from "../services/email.service.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { contactEnquirySchema } from "../validators/contact.validator.js";
 
@@ -75,6 +76,19 @@ export const getWebsiteSettings = asyncHandler(async (_req, res) => {
 
 export const createContactEnquiry = asyncHandler(async (req, res) => {
   const payload = contactEnquirySchema.parse(req.body);
-  const enquiry = await ContactEnquiry.create(payload);
-  res.status(201).json({ enquiry });
+  const settings = await WebsiteSetting.findOne({ key: "website" });
+  const recipientEmail = String(payload.recipientEmail || settings?.value?.enquiryEmail || settings?.value?.email || process.env.ENQUIRY_TO_EMAIL || "");
+  const enquiry = await ContactEnquiry.create({ ...payload, recipientEmail });
+
+  let emailSent = false;
+  if (recipientEmail) {
+    try {
+      const result = await sendContactEnquiryEmail({ ...payload, recipientEmail });
+      emailSent = result.sent;
+    } catch (error) {
+      console.warn(error);
+    }
+  }
+
+  res.status(201).json({ enquiry, emailSent });
 });

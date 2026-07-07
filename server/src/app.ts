@@ -46,6 +46,12 @@ export function createApp() {
     res.json({ status: "ok", service: "siyu-creativity-api" });
   });
 
+  app.use("/api/public", (req, res, next) => {
+    if (req.method === "GET") {
+      res.setHeader("Cache-Control", "public, max-age=30, stale-while-revalidate=120");
+    }
+    next();
+  });
   app.use("/api/public", publicRoutes);
   app.use("/api/admin", adminRoutes);
   app.use(errorHandler);

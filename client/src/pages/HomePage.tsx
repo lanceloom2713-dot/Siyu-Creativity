@@ -12,12 +12,12 @@ const splitImages = (value?: string) =>
     .filter(Boolean);
 
 export function HomePage() {
-  const { data: home } = useQuery({ queryKey: ["public-home"], queryFn: publicCatalogueApi.getHome });
+  const { data: home, isLoading } = useQuery({ queryKey: ["public-home"], queryFn: publicCatalogueApi.getHome });
   const homepage = home?.homepage ?? {};
 
   return (
     <>
-      <Hero title={homepage.heroTitle} subtitle={homepage.heroSubtitle} announcement={homepage.announcement} image={homepage.heroImage} images={splitImages(homepage.heroImages)} />
+      <Hero title={homepage.heroTitle} subtitle={homepage.heroSubtitle} announcement={homepage.announcement} image={homepage.heroImage} images={splitImages(homepage.heroImages)} loading={isLoading} />
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
         <SectionHeading
           eyebrow="Featured categories"

@@ -10,17 +10,24 @@ type HeroProps = {
   announcement?: string;
   image?: string;
   images?: string[];
+  loading?: boolean;
 };
 
-export function Hero({ title = "Siyu Creativity", subtitle = "Discover handcrafted gifting and personalized decor designed with soft detail, elegant finishing, and custom enquiry support.", announcement = "Premium custom catalogue", image = logo, images = [] }: HeroProps) {
-  const slides = useMemo(() => (images.length ? images : [image || logo]), [image, images]);
+export function Hero({ title = "Siyu Creativity", subtitle = "Discover handcrafted gifting and personalized decor designed with soft detail, elegant finishing, and custom enquiry support.", announcement = "Premium custom catalogue", image = logo, images = [], loading = false }: HeroProps) {
+  const slides = useMemo(() => (loading ? [] : images.length ? images : [image || logo]), [image, images, loading]);
   const [activeSlide, setActiveSlide] = useState(0);
+
+  useEffect(() => {
+    setActiveSlide(0);
+  }, [slides.length]);
 
   useEffect(() => {
     if (slides.length < 2) return;
     const timer = window.setInterval(() => setActiveSlide((current) => (current + 1) % slides.length), 3500);
     return () => window.clearInterval(timer);
   }, [slides.length]);
+
+  const activeImage = slides[activeSlide] ?? slides[0];
 
   return (
     <section className="relative overflow-hidden bg-[linear-gradient(135deg,#ffffff_0%,#eef9ff_35%,#f6ecff_70%,#fff7fb_100%)]">
@@ -51,7 +58,11 @@ export function Hero({ title = "Siyu Creativity", subtitle = "Discover handcraft
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.1, duration: 0.6 }}
         >
-          <img className="aspect-square w-full rounded-[1.5rem] object-cover transition-opacity duration-500" src={slides[activeSlide]} alt={`${title} hero`} />
+          {activeImage ? (
+            <img className="aspect-square w-full rounded-[1.5rem] object-cover transition-opacity duration-500" src={activeImage} alt={`${title} hero`} fetchPriority="high" />
+          ) : (
+            <div className="aspect-square w-full animate-pulse rounded-[1.5rem] bg-white/80" />
+          )}
           {slides.length > 1 ? (
             <div className="absolute bottom-7 left-1/2 flex -translate-x-1/2 gap-2 rounded-full bg-white/70 px-3 py-2 shadow-soft">
               {slides.map((slide, index) => (

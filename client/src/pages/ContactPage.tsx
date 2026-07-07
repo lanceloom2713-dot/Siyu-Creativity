@@ -23,17 +23,19 @@ export function ContactPage() {
 
   return (
     <section className="mx-auto grid max-w-7xl gap-8 px-4 py-14 sm:px-6 lg:grid-cols-[0.8fr_1.2fr] lg:px-8">
-      <div>
+      <div className="rounded-[2rem] border border-ink/5 bg-white/70 p-6 shadow-soft">
         <h1 className="font-display text-5xl font-semibold">Contact Siyu Creativity</h1>
         <div className="mt-8 grid gap-4 text-sm text-ink/70">
           <p className="flex items-center gap-3"><MessageCircle size={18} /> WhatsApp: {settings?.whatsapp ?? "+91 99999 99999"}</p>
           <p className="flex items-center gap-3"><Phone size={18} /> Phone: {settings?.phone ?? "+91 99999 99999"}</p>
           <p className="flex items-center gap-3"><Mail size={18} /> {settings?.email ?? "hello@siyucreativity.com"}</p>
           <p className="flex items-center gap-3"><MapPin size={18} /> {settings?.address ?? "India"}</p>
-          <p className="flex items-center gap-3"><Mail size={18} /> Enquiries: {settings?.enquiryEmail ?? settings?.email ?? "hello@siyucreativity.com"}</p>
+          {settings?.enquiryEmail && settings.enquiryEmail !== settings?.email ? (
+            <p className="flex items-center gap-3"><Mail size={18} /> Enquiries: {settings.enquiryEmail}</p>
+          ) : null}
         </div>
       </div>
-      <form className="rounded-[2rem] bg-white p-6 shadow-soft" onSubmit={submit}>
+      <form className="rounded-[2rem] border border-ink/5 bg-white p-6 shadow-soft" onSubmit={submit}>
         <div className="grid gap-4 md:grid-cols-2">
           <input className="rounded-2xl border border-ink/10 px-4 py-3" placeholder="Name" value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} />
           <input className="rounded-2xl border border-ink/10 px-4 py-3" placeholder="Phone" value={form.phone} onChange={(event) => setForm({ ...form, phone: event.target.value })} />
