@@ -38,7 +38,7 @@ export function ContactPage() {
   return (
     <section className="mx-auto grid max-w-7xl gap-8 px-4 py-14 sm:px-6 lg:grid-cols-[0.8fr_1.2fr] lg:px-8">
       <div className="rounded-[2rem] border border-ink/5 bg-white/70 p-6 shadow-soft">
-        <h1 className="font-display text-5xl font-semibold">Contact Siyu Creativity</h1>
+        <h1 className="font-display text-5xl font-semibold">Contact Us</h1>
         <div className="mt-8 grid gap-4 text-sm text-ink/70">
           <p className="flex items-center gap-3"><MessageCircle size={18} /> WhatsApp: {settings?.whatsapp ?? "+91 99999 99999"}</p>
           <p className="flex items-center gap-3"><Phone size={18} /> Phone: {settings?.phone ?? "+91 99999 99999"}</p>
