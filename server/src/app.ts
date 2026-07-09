@@ -6,9 +6,15 @@ import { errorHandler } from "./middleware/errorHandler.js";
 import { adminRoutes } from "./routes/admin.routes.js";
 import { publicRoutes } from "./routes/public.routes.js";
 
+const parseOrigins = (value?: string) =>
+  String(value ?? "")
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean);
+
 export function createApp() {
   const app = express();
-  const origins = [process.env.CLIENT_ORIGIN, process.env.ADMIN_ORIGIN].filter(Boolean) as string[];
+  const origins = [...parseOrigins(process.env.CLIENT_ORIGIN), ...parseOrigins(process.env.ADMIN_ORIGIN)];
 
   app.use(
     helmet({

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const http = axios.create({
-  baseURL: import.meta.env.VITE_API_URL ?? "http://localhost:5002/api/admin"
+  baseURL: import.meta.env.VITE_API_URL ?? "https://siyu-creativity-api.onrender.com/api/admin"
 });
 
 http.interceptors.request.use((config) => {
